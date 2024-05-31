@@ -1,19 +1,19 @@
 import openai
 import streamlit as st
 
+# Load secrets from secrets.toml file
+st.secrets['api_key'] = 'sk-your-openai-api-key'
+
 # Set up the OpenAI API client
+openai.api_key = st.secrets['api_key']
 
-
-headers={
-    "authorization": st.secrets["api_key"],
-    "content-type":"application/json"
-}
 # Streamlit application
-st.title("Chat with GPT-3.5 Turbo")
+st.title("EduMinds")
+st.title("Your Personal Assistant")
 
 def chat_with_gpt(prompt):
     response = openai.Completion.create(
-        model="gpt-3.5-turbo",
+        model="text-davinci-003",  # Specify your model here
         prompt=prompt,
         max_tokens=150,
         temperature=0.7,
@@ -31,13 +31,13 @@ def chat_interface():
 
     # Display conversation history
     for user_input, response in st.session_state.conversations:
-        st.write(f"You: {user_input}")
+        st.write(f"User_input: {user_input}")
         st.write(f"Chatbot: {response}")
         st.markdown('---')
 
     # User input and Send button
     user_input_key = st.session_state.user_input_count if 'user_input_count' in st.session_state else 0
-    user_input = st.text_input(f"You:", key=f"user_input_{user_input_key}")
+    user_input = st.text_input(f"Your message for EduMinds:", key=f"user_input_{user_input_key}")
     send_button = st.button("Send")
 
     if send_button and user_input:
