@@ -4,7 +4,7 @@ import streamlit as st
 # Set up the OpenAI API client
 
 
-header={
+headers={
     "authorization": st.secrets("api_key"),
     "content-type":"application/json"
 }
