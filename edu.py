@@ -7,7 +7,7 @@ import streamlit as st
 header={
     "authorization": st.secrets("api_key"),
     "content-type":"application/json"
-
+}
 # Streamlit application
 st.title("Chat with GPT-3.5 Turbo")
 
