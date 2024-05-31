@@ -2,14 +2,13 @@ import openai
 import streamlit as st
 
 # Load secrets from secrets.toml file
-st.secrets['api_key'] = 'sk-your-openai-api-key'
+st.secrets['api_key'] = st.secrets["openai"]["api_key"]
 
 # Set up the OpenAI API client
 openai.api_key = st.secrets['api_key']
 
 # Streamlit application
-st.title("EduMinds")
-st.title("Your Personal Assistant")
+st.title("Chat with GPT-3.5 Turbo")
 
 def chat_with_gpt(prompt):
     response = openai.Completion.create(
@@ -31,13 +30,13 @@ def chat_interface():
 
     # Display conversation history
     for user_input, response in st.session_state.conversations:
-        st.write(f"User_input: {user_input}")
+        st.write(f"You: {user_input}")
         st.write(f"Chatbot: {response}")
         st.markdown('---')
 
     # User input and Send button
     user_input_key = st.session_state.user_input_count if 'user_input_count' in st.session_state else 0
-    user_input = st.text_input(f"Your message for EduMinds:", key=f"user_input_{user_input_key}")
+    user_input = st.text_input(f"You:", key=f"user_input_{user_input_key}")
     send_button = st.button("Send")
 
     if send_button and user_input:
