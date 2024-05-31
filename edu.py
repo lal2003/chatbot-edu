@@ -2,7 +2,11 @@ import openai
 import streamlit as st
 
 # Set up the OpenAI API client
-openai.api_key = "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"
+
+
+header={
+    "authorization": st.secrets("api_key"),
+    "content-type":"application/json"
 
 # Streamlit application
 st.title("Chat with GPT-3.5 Turbo")
