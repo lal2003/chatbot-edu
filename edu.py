@@ -5,7 +5,7 @@ import streamlit as st
 
 
 headers={
-    "authorization": st.secrets("api_key"),
+    "authorization": st.secrets["api_key"],
     "content-type":"application/json"
 }
 # Streamlit application
