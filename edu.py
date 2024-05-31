@@ -8,11 +8,17 @@ openai.api_key = "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"
 st.title("Chat with GPT-3.5 Turbo")
 
 def chat_with_gpt(prompt):
-    response = openai.ChatCompletion.create(
+    response = openai.Completion.create(
         model="gpt-3.5-turbo",
-        messages=[{"role": "user", "content": prompt}]
+        prompt=prompt,
+        max_tokens=150,
+        temperature=0.7,
+        top_p=1,
+        frequency_penalty=0,
+        presence_penalty=0,
+        stop=None
     )
-    return response.choices[0].message['content'].strip()
+    return response.choices[0].text.strip()
 
 def chat_interface():
     # Initialize session state if not already done
